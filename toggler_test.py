@@ -4,20 +4,27 @@ from toggler import Toggler
 
 
 class TestToggler(unittest.TestCase):
-    def setUp(self):
+    """ This class tests the Toggler class. """
+
+    def setUp(self) -> None:
+        """ This method instantiates a Toggler. """
         self.toggler = Toggler('.test/etc/sysctl.conf')
 
     def tearDown(self) -> None:
+        """ This method destroys the existing Toggler. """
         del self.toggler
 
-    def test_constructor(self):
+    def test_constructor(self) -> None:
+        """ This method tests the Toggler class's constructor. """
         self.assertIsNotNone(self.toggler)
 
-    def test_read_data(self):
+    def test_read_data(self) -> None:
+        """ This method tests the Toggler class's read_data method. """
         self.toggler.read_file()
         self.assertTrue(len(self.toggler.data) > 0)
 
-    def test_is_using_ipv6(self):
+    def test_is_using_ipv6(self) -> None:
+        """ This method tests the Toggler class's is_using_ipv6 method. """
         ipv6_active = self.toggler.is_using_ipv6()
         verified_ipv6_active = False
 
@@ -28,7 +35,8 @@ class TestToggler(unittest.TestCase):
 
         self.assertEqual(ipv6_active, verified_ipv6_active)
 
-    def test_disable_ipv6(self):
+    def test_disable_ipv6(self) -> None:
+        """ This method tests the Toggler class's disable_ipv6 method. """
         self.toggler.disable_ipv6()
 
         self.toggler.file.seek(0)
@@ -42,7 +50,8 @@ class TestToggler(unittest.TestCase):
 
         self.assertTrue(ipv6_is_disabled)
 
-    def test_enable_ipv6(self):
+    def test_enable_ipv6(self) -> None:
+        """ This method tests the Toggler class's enable_ipv6 method. """
         self.toggler.enable_ipv6()
         self.toggler.file.seek(0)
         data = self.toggler.file.readlines()
@@ -55,7 +64,8 @@ class TestToggler(unittest.TestCase):
 
             self.assertTrue(ipv6_is_enabled)
 
-    def test_toggle_ipv6(self):
+    def test_toggle_ipv6(self) -> None:
+        """ This method tests the Toggler class's toggle_ipv6 method. """
         start_data = self.toggler.data
         is_ipv6_active_at_start = False
         is_ipv6_active_at_finish = False
