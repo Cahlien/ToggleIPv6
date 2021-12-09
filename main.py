@@ -8,7 +8,7 @@ def protected_main():
     try:
         toggler = Toggler('/etc/sysctl.conf')
         toggler.toggle_ipv6()
-        call(['sysctl', '-p'])
+        print("[+] Run 'sudo sysctl -p' to finish toggling your IPv6 settings.")
     except IOError:
         print('[=] Error: I/O exception encountered')
 

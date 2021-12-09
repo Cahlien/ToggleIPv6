@@ -37,7 +37,7 @@ class TestToggler(unittest.TestCase):
         ipv6_is_disabled = True
 
         for line in data:
-            if line.find('ipv6') >= 0 and line[0] != '#':
+            if line.find('ipv6=0') >= 0:
                 ipv6_is_disabled = False
 
         self.assertTrue(ipv6_is_disabled)
@@ -61,14 +61,14 @@ class TestToggler(unittest.TestCase):
         is_ipv6_active_at_finish = False
 
         for line in start_data:
-            if line.find('ipv6') >= 0 and line[0] != '#':
+            if line.find('ipv6=0') >= 0:
                 is_ipv6_active_at_start = True
 
         self.toggler.toggle_ipv6()
 
         finish_data = self.toggler.data
         for line in finish_data:
-            if line.find('ipv6') >= 0 and line[0] != '#':
+            if line.find('ipv6=0') >= 0:
                 is_ipv6_active_at_finish = True
 
         self.assertNotEqual(is_ipv6_active_at_start, is_ipv6_active_at_finish)

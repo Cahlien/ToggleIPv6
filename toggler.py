@@ -24,8 +24,8 @@ class Toggler:
         data = []
 
         for line in self.data:
-            if line.find('ipv6') >= 0 and not line.startswith('#'):
-                line = '#' + line
+            if line.find('ipv6'):
+                line = line.replace('ipv6=0', 'ipv6=1')
 
             data.append(line)
 
@@ -35,8 +35,8 @@ class Toggler:
     def enable_ipv6(self):
         data = []
         for line in self.data:
-            if line.find('ipv6') >= 0 and line.startswith('#'):
-                line = line[1:len(line)]
+            if line.find('ipv6=1') >= 0:
+                line = line.replace('ipv6=1', 'ipv6=0')
 
             data.append(line)
 
@@ -47,9 +47,9 @@ class Toggler:
         is_active = True
 
         for line in self.data:
-            if is_active is True and line.find('ipv6') >= 0 and line[0] == '#':
+            if is_active is True and line.find('ipv6=1') >= 0:
                 is_active = False
-            elif is_active is False and line.find('ipv6') >= 0 and line[0] != '#':
+            elif is_active is False and line.find('ipv6=0') >= 0:
                 is_active = True
 
         return is_active
